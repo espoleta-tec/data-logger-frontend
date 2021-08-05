@@ -5,15 +5,22 @@
     </q-tabs>
     <div class="q-pa-md"/>
     <q-tab-panels class="q-card" style="min-height: 500px" v-model="currentTab">
-      <q-tab-panel :key="i" :name="i" v-for="i in 6">
-        <div>Informacion referente a estacion {{i}}</div>
-        <pre style="font-family: 'Raleway Medium', sans-serif">
+      <q-tab-panel :key="i" :name="i" class="column absolute-full" v-for="i in 6">
+        <section>
+          <div>Informacion referente a estacion {{i}}</div>
+          <pre style="font-family: 'Raleway Medium', sans-serif">
           nombre: estacion {{i}}
           version: 0.0.1
           capacidad: 4GB
           espacio ocupado: 300Mb
           porciento ocupado: {{300/4000*100}}%
         </pre>
+        </section>
+        <q-space/>
+        <section class="text-right q-gutter-md">
+          <q-btn label="Borrar datos almacenados" color="negative"/>
+          <q-btn color="secondary" label="Descargar datos"/>
+        </section>
       </q-tab-panel>
     </q-tab-panels>
   </q-page>

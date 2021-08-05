@@ -6,6 +6,7 @@
       </q-card-section>
       <q-card-section class="flex no-wrap justify-end q-gutter-sm">
         <q-btn color="primary" label="connect"/>
+        <q-btn icon="edit"/>
         <q-btn color="negative" icon="delete"/>
       </q-card-section>
     </q-card>
