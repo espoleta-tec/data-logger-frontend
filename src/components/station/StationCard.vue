@@ -4,8 +4,8 @@
       <q-card-section class="bg-primary text-white">
         Estacion 1
       </q-card-section>
-      <q-card-section class="flex justify-end q-gutter-sm">
-        <q-btn color="primary" label="connect"/>
+      <q-card-section class="row justify-end q-gutter-sm">
+        <q-btn class="col-12 col-sm-auto" color="accent" label="connect"/>
         <q-btn @click="showDialog = true" icon="edit"/>
         <q-btn color="negative" icon="delete"/>
       </q-card-section>

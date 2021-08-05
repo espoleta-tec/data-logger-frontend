@@ -1,0 +1,8 @@
+.darken {
+  :hover {
+    filter: opacity(0.90);
+    transition: filter 300ms linear;
+    -webkit-transition: -webkit-filter 300ms linear;
+    -moz-transition: -moz-filter 300ms linear;
+  }
+}
