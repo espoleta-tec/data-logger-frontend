@@ -1,1 +1,13 @@
 // app global css in SCSS form
+
+body {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.override-user-select {
+  user-select: text;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+}
