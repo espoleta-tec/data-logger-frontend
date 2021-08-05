@@ -11,20 +11,20 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from 'vue';
-  import { useRoute } from 'vue-router';
+  import { computed, defineComponent } from 'vue'
+  import { useRoute } from 'vue-router'
 
   export default defineComponent({
     // name: 'ComponentName'
     setup() {
-      const $route = useRoute();
+      const $route = useRoute()
       const enableBack = computed(() => {
-        return $route.fullPath !== '/';
-      });
+        return $route.fullPath !== '/'
+      })
 
       return {
         $route, enableBack
-      };
+      }
     }
-  });
+  })
 </script>

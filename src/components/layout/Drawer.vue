@@ -49,7 +49,7 @@
           return []
         }
 
-        return rs.children
+        return rs.children.filter(r => r.name)
       })
       return {
         fixDrawer, chevron, routes, currentRoute, drawerState

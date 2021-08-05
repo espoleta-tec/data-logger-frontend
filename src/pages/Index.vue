@@ -1,13 +1,13 @@
 <template>
   <q-page class="row items-start">
-    <main-card to="/station" :key="i" class="col-12 col-sm-6 col-md-4 col-lg-3" v-for="i in 4"/>
+    <main-card :key="i" :to="`/station/${i}`" class="col-12 col-sm-6 col-md-4 col-lg-3" v-for="i in 4"/>
   </q-page>
 </template>
 
 <script lang="ts">
-  import { Meta, Todo } from 'components/models';
-  import { defineComponent, ref } from 'vue';
-  import MainCard from 'components/MainCard.vue';
+  import { Meta, Todo } from 'components/models'
+  import { defineComponent, ref } from 'vue'
+  import MainCard from 'components/MainCard.vue'
 
   export default defineComponent({
     name: 'PageIndex',
@@ -34,11 +34,11 @@
           id: 5,
           content: 'ct5'
         }
-      ]);
+      ])
       const meta = ref<Meta>({
         totalCount: 1200
-      });
-      return { todos, meta };
+      })
+      return { todos, meta }
     }
-  });
+  })
 </script>
