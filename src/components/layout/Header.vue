@@ -7,14 +7,9 @@
       <q-space/>
       <q-btn-dropdown flat icon="language">
         <q-list>
-          <q-item>
+          <q-item :key="lang" @click="changeLanguage(lang)" clickable v-for="lang in i18n.availableLocales" v-ripple>
             <q-item-section>
-              Español
-            </q-item-section>
-          </q-item>
-          <q-item>
-            <q-item-section>
-              English
+              {{lang}}
             </q-item-section>
           </q-item>
         </q-list>
@@ -26,17 +21,23 @@
 <script lang="ts">
   import { computed, defineComponent } from 'vue'
   import { useRoute } from 'vue-router'
+  import { useI18n } from 'vue-i18n'
+
 
   export default defineComponent({
     // name: 'ComponentName'
     setup() {
+      const i18n = useI18n()
       const $route = useRoute()
       const enableBack = computed(() => {
         return $route.fullPath !== '/'
       })
+      const changeLanguage = (locale: string) => {
+        i18n.locale.value = locale
+      }
 
       return {
-        $route, enableBack
+        $route, enableBack, i18n, changeLanguage
       }
     }
   })
