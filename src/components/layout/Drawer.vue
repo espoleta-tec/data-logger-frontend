@@ -1,7 +1,7 @@
 <template>
-  <q-drawer behavior="desktop"
-            class="bg-secondary column" elevated persistent
-            v-model="$store.state.layout.drawerState">
+  <q-drawer class="bg-secondary column"
+            elevated show-if-above
+            v-model="drawerState">
     <q-space/>
     <q-list class="text-body1 text-white col">
       <q-item :active="currentRoute.name === route.name" :key="route.path" @click="$router.push(`/${route.path}`)"
@@ -33,6 +33,15 @@
       const chevron = computed(() => {
         return `chevron_${$store.state.layout.mini ? 'right' : 'left'}`
       })
+
+      const drawerState = computed({
+        get() {
+          return $store.state.layout.drawerState
+        },
+        set(newValue: boolean) {
+          $store.commit('layout/changeDrawerState', newValue)
+        }
+      })
       const routes = computed(() => {
         let rs = $router.getRoutes().filter(r => r.path === '/')[1]
 
@@ -43,7 +52,7 @@
         return rs.children
       })
       return {
-        fixDrawer, chevron, routes, currentRoute
+        fixDrawer, chevron, routes, currentRoute, drawerState
       }
     }
   })

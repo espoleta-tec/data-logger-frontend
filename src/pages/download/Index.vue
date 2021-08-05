@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <q-tabs v-model="currentTab">
+    <q-tabs active-bg-color="primary" active-color="white" v-model="currentTab">
       <q-tab :key="i" :label="`station ${i}`" :name="i" v-for="i in 6"/>
     </q-tabs>
     <div class="q-pa-md"/>
@@ -18,7 +18,7 @@
         </section>
         <q-space/>
         <section class="text-right q-gutter-md">
-          <q-btn label="Borrar datos almacenados" color="negative"/>
+          <q-btn color="negative" label="Borrar datos"/>
           <q-btn color="secondary" label="Descargar datos"/>
         </section>
       </q-tab-panel>

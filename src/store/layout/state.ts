@@ -6,8 +6,8 @@ export interface LayoutStateInterface {
 
 function state(): LayoutStateInterface {
   return {
-    drawerState: true, mini: true, overlay: false
-  };
+    drawerState: false, mini: true, overlay: false
+  }
 }
 
-export default state;
+export default state
