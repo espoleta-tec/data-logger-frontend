@@ -1,7 +1,7 @@
 <template>
   <q-dialog persistent>
-    <q-card class="column">
-      <q-form @cancel="closeDialog" @submit="closeDialog">
+    <q-card class="flex" style="width: 80vw; max-width: 1280px; height: 80vh; max-height: 80vh;">
+      <q-form @cancel="closeDialog" @submit="closeDialog" class="col column">
         <q-card-section class="col-auto">
           <div class="text-h5">Editar parametros de estacion</div>
         </q-card-section>
