@@ -1,11 +1,11 @@
 <template>
   <q-header elevated>
-    <q-toolbar class="q-pa-sm q-gutter-md">
-      <q-btn @click="$store.commit('layout/toggleDrawer')" color="white" flat icon="menu" round/>
-      <q-btn @click="$router.go(-1)" flat icon="chevron_left" round v-if="enableBack"/>
-      <q-toolbar-title>
-        Meteor Data Logger
-      </q-toolbar-title>
+    <q-toolbar class="q-pa-sm">
+      <q-btn @click="$store.commit('layout/toggleDrawer')" color="white" flat icon="menu"/>
+      <q-btn @click="$router.go(-1)" flat icon="chevron_left" label="back" v-if="enableBack"/>
+      <q-menu>
+
+      </q-menu>
     </q-toolbar>
   </q-header>
 </template>
