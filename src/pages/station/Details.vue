@@ -30,6 +30,7 @@
   import Radar from 'components/graphs/Radar.vue'
 
   const tabs = Object.getOwnPropertyNames(new StationVariableDto())
+  tabs.push('transpiration')
 
   export default defineComponent({
     // name: 'PageName'
