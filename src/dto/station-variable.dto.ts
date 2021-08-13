@@ -1,6 +1,8 @@
 export class StationVariableDto {
-  windDirection = ''
-  windSpeed = 0
+  wind: {
+    speed?: number,
+    direction?: string
+  } = {}
   lightPower = 0
   precipitation = 0
   temperature = 0
