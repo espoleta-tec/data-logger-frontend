@@ -1,4 +1,6 @@
-export const options: ApexCharts.ApexOptions = {
+import { ApexOptions } from 'apexcharts'
+
+export const options: ApexOptions = {
   chart: {
     type: 'area'
   }
