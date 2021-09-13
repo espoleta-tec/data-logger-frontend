@@ -4,7 +4,7 @@
             v-model="drawerState">
     <q-space/>
     <q-list class="text-body1 text-white col">
-      <q-item :active="currentRoute.name === route.name" :key="route.path" @click="router.push(`/${route.path}`)"
+      <q-item :active="currentRoute.name === route.name" :key="route.path" @click="$router.push(`/${route.path}`)"
               active-class="bg-white" clickable v-for="route in routes" v-ripple>
         <q-item-section avatar>
           <q-icon name="person"/>
