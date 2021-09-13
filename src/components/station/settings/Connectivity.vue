@@ -5,29 +5,29 @@
       <q-input v-model="current.ip" hint="192.168.1.1" label="Ip"/>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
-      <q-input label="Ip Mask"/>
+      <q-input v-model="current.ipMask" label="Ip Mask"/>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
-      <q-input label="SSID"/>
+      <q-input v-model="current.ssid" label="SSID"/>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
-      <q-input label="Password" type="password"/>
+      <q-input v-model="current.password" label="Password" type="password"/>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
-      <q-input label="hostname"/>
+      <q-input v-model="current.hostname" label="hostname"/>
     </div>
     <div class="col-12 col-md-6 q-pa-md flex justify-end items-end">
       <q-btn-dropdown label="Connection mode" color="primary">
         <q-list>
-          <q-item clickable>
+          <q-item clickable v-close-popup @click="current.connectionMode = 'AP'">
             <q-item-section avatar>
-              <q-icon name="check"/>
+              <q-icon name="check" v-if="current.connectionMode === 'AP'"/>
             </q-item-section>
             <q-item-section>AP</q-item-section>
           </q-item>
-          <q-item clickable>
+          <q-item v-close-popup clickable @click="current.connectionMode = 'STATION'">
             <q-item-section avatar>
-              <q-icon v-if="false" name="check"/>
+              <q-icon name="check" v-if="current.connectionMode === 'STATION'"/>
             </q-item-section>
             <q-item-section>Station</q-item-section>
           </q-item>

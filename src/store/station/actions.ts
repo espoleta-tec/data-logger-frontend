@@ -5,6 +5,9 @@ import { api } from 'boot/axios'
 
 const actions: ActionTree<StationStateInterface, StateInterface> = {
   async saveCurrentStation(context) {
+    if (!context.state.currentStation?.id) {
+      return api.post('/station', context.state.currentStation)
+    }
     if (context.state.currentStation?.id) {
       return api.patch(`/station/${+context.state.currentStation.id}`, context.state.currentStation)
     }

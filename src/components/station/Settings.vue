@@ -18,8 +18,7 @@
           </q-tab-panels>
         </q-card-section>
         <q-card-section class="col-auto text-right q-gutter-md">
-          <q-btn color="positive" label="save" type="submit" v-close-popup
-                 @click="$store.dispatch('station/saveCurrentStation')"/>
+          <q-btn color="positive" label="save" type="submit" v-close-popup/>
           <q-btn color="negative" label="cancel" type="cancel" v-close-popup/>
         </q-card-section>
       </q-form>
@@ -36,14 +35,12 @@
 
   export default defineComponent({
     // name: 'ComponentName'
-    props: {
-      station: Object
-    },
-    setup(props) {
-      const closeDialog = () => {
-        console.log('Dialog closed')
-      }
+    setup() {
       const store = useStore()
+
+      const closeDialog = async () => {
+        await store.dispatch('station/saveCurrentStation')
+      }
 
       const currentTab = ref(tabs[0])
 

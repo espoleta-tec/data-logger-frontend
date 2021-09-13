@@ -1,8 +1,8 @@
 <template>
-  <div class="q-pa-lg">
-    <q-card>
-      <q-card-section class="bg-primary text-white">
-        {{station.hostname}}
+  <div class="q-pa-lg flex">
+    <q-card class="col">
+      <q-card-section class="bg-primary text-white text-h6">
+        <span>{{station.hostname}}</span>
       </q-card-section>
       <q-card-section class="row justify-end q-gutter-sm">
         <q-btn class="col-12 col-sm-auto" color="accent" label="connect"/>
@@ -11,7 +11,7 @@
       </q-card-section>
     </q-card>
 
-    <settings :station="station" v-model="showDialog" :key="showDialog"/>
+    <settings v-model="showDialog" :key="showDialog"/>
   </div>
 </template>
 
