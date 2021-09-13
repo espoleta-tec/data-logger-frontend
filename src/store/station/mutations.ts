@@ -2,8 +2,8 @@ import { MutationTree } from 'vuex'
 import { StationStateInterface } from './state'
 
 const mutation: MutationTree<StationStateInterface> = {
-  someMutation(state: StationStateInterface) {
-    // your code
+  changeCurrentStation(state: StationStateInterface, payload: Record<string, any>) {
+    state.currentStation = payload
   }
 }
 

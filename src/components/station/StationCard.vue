@@ -2,7 +2,7 @@
   <div class="q-pa-lg">
     <q-card>
       <q-card-section class="bg-primary text-white">
-        Estacion 1
+        {{station.hostname}}
       </q-card-section>
       <q-card-section class="row justify-end q-gutter-sm">
         <q-btn class="col-12 col-sm-auto" color="accent" label="connect"/>
@@ -11,21 +11,36 @@
       </q-card-section>
     </q-card>
 
-    <settings v-model="showDialog"/>
+    <settings :station="station" v-model="showDialog" :key="showDialog"/>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
+  import { computed, defineComponent, ref } from 'vue'
   import Settings from 'components/station/Settings.vue'
+  import { useStore } from 'src/store'
 
   export default defineComponent({
     // name: 'ComponentName'
     components: {
       Settings
     },
-    setup() {
-      const showDialog = ref(false)
+    props: {
+      station: Object
+    },
+    setup(props) {
+      const showDialogProp = ref(false)
+      const store = useStore()
+
+      const showDialog = computed({
+        get() {
+          return showDialogProp.value
+        },
+        set(newVal: boolean) {
+          store.commit('station/changeCurrentStation', props.station)
+          showDialogProp.value = newVal
+        }
+      })
 
       return {
         showDialog

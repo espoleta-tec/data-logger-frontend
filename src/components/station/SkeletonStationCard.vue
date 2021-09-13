@@ -1,6 +1,6 @@
 <template>
-  <div class="q-pa-lg">
-    <q-card class="cursor-pointer" v-ripple>
+  <div class="q-pa-lg flex">
+    <q-card class="cursor-pointer col flex flex-center" v-ripple>
       <q-card-section class="flex no-wrap flex-center q-gutter-sm">
         <q-icon class="text-h3" name="add"/>
       </q-card-section>

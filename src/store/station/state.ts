@@ -1,5 +1,6 @@
 export interface StationStateInterface {
-  connectedStations: unknown[]
+  connectedStations: unknown[],
+  currentStation?: Record<string, any>
 }
 
 function state(): StationStateInterface {

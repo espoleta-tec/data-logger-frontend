@@ -13,17 +13,21 @@
         </q-card>
       </q-toolbar>
     </section>
-    <section class="row">
-      <station-card :key="i" class="col-12 col-sm-6 col-lg-4" v-for="i in 6"/>
+    <section :class="['grid grid-cols-1 grid-rows-auto',
+    {'grid-cols-2': $q.screen.sm},
+    {'grid-cols-3': $q.screen.md},
+    {'grid-cols-4': $q.screen.lg}]">
+      <station-card :station="station" :key="station" class="col-12 col-sm-6 col-lg-4" v-for="station in stations"/>
       <skeleton-station-card class="col-12 col-sm-6 col-lg-4"/>
     </section>
   </q-page>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { defineComponent, onBeforeMount, ref } from 'vue'
   import StationCard from 'components/station/StationCard.vue'
   import SkeletonStationCard from 'components/station/SkeletonStationCard.vue'
+  import { api } from 'boot/axios'
 
   export default defineComponent({
     // name: 'PageName'
@@ -34,6 +38,17 @@
       return {
         filter: ''
       }
+    },
+    setup() {
+      let stations = ref([])
+
+      onBeforeMount(async () => {
+        const { data } = await api.get('/station')
+
+        stations.value = data
+      })
+
+      return { stations }
     }
   })
 </script>

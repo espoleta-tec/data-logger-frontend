@@ -27,18 +27,22 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
+  import { defineComponent, onBeforeUpdate, ref } from 'vue'
+  import { useStore } from 'src/store'
 
   const tabs = ['network', 'variables', 'security']
 
 
   export default defineComponent({
     // name: 'ComponentName'
-
-    setup() {
+    props: {
+      station: Object
+    },
+    setup(props) {
       const closeDialog = () => {
         console.log('Dialog closed')
       }
+      const store = useStore()
 
       const currentTab = ref(tabs[0])
 

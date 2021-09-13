@@ -1,7 +1,8 @@
 <template>
   <div class="q-pa-md row">
+    {{current}}
     <div class="col-12 col-md-6 q-pa-md">
-      <q-input hint="192.168.1.1" label="Ip"/>
+      <q-input v-model="current.ip" hint="192.168.1.1" label="Ip"/>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
       <q-input label="Ip Mask"/>
@@ -38,8 +39,12 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
+  import { useCurrentStation } from 'src/utils/storeInterface/use-current-station'
 
   export default defineComponent({
-    name: 'network'
+    name: 'network',
+    setup() {
+      return { current: useCurrentStation() }
+    }
   })
 </script>
