@@ -18,7 +18,8 @@
           </q-tab-panels>
         </q-card-section>
         <q-card-section class="col-auto text-right q-gutter-md">
-          <q-btn color="positive" label="save" type="submit" v-close-popup/>
+          <q-btn color="positive" label="save" type="submit" v-close-popup
+                 @click="$store.dispatch('station/saveCurrentStation')"/>
           <q-btn color="negative" label="cancel" type="cancel" v-close-popup/>
         </q-card-section>
       </q-form>
@@ -27,7 +28,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onBeforeUpdate, ref } from 'vue'
+  import { defineComponent, ref } from 'vue'
   import { useStore } from 'src/store'
 
   const tabs = ['network', 'variables', 'security']

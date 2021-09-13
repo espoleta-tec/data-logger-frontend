@@ -4,7 +4,7 @@
             v-model="drawerState">
     <q-space/>
     <q-list class="text-body1 text-white col">
-      <q-item :active="currentRoute.name === route.name" :key="route.path" @click="$router.push(`/${route.path}`)"
+      <q-item :active="currentRoute.name === route.name" :key="route.path" @click="router.push(`/${route.path}`)"
               active-class="bg-white" clickable v-for="route in routes" v-ripple>
         <q-item-section avatar>
           <q-icon name="person"/>
@@ -26,24 +26,24 @@
     // name: 'ComponentName'
     setup() {
       const fixDrawer = ref(false)
-      const $store = useStore()
-      const $router = useRouter()
+      const store = useStore()
+      const router = useRouter()
       const currentRoute = useRoute()
 
       const chevron = computed(() => {
-        return `chevron_${$store.state.layout.mini ? 'right' : 'left'}`
+        return `chevron_${store.state.layout.mini ? 'right' : 'left'}`
       })
 
       const drawerState = computed({
         get() {
-          return $store.state.layout.drawerState
+          return store.state.layout.drawerState
         },
         set(newValue: boolean) {
-          $store.commit('layout/changeDrawerState', newValue)
+          store.commit('layout/changeDrawerState', newValue)
         }
       })
       const routes = computed(() => {
-        let rs = $router.getRoutes().filter(r => r.path === '/')[1]
+        let rs = router.getRoutes().filter(r => r.path === '/')[1]
 
         if (!rs) {
           return []

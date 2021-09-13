@@ -4,7 +4,7 @@ import { createStore, Store as VuexStore, useStore as vuexUseStore } from 'vuex'
 import layout from './layout'
 import { LayoutStateInterface } from 'src/store/layout/state'
 import station from './station'
-import {StationStateInterface} from 'src/store/station/state'
+import { StationStateInterface } from 'src/store/station/state'
 
 // import example from './module-example'
 // import { ExampleStateInterface } from './module-example/state';
@@ -45,7 +45,8 @@ export default store(function(/* { ssrContext } */) {
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only
-    strict: !!process.env.DEBUGGING
+    // strict: !!process.env.DEBUGGING
+    strict: false
   })
 })
 
