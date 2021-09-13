@@ -1,12 +1,12 @@
+import { Station } from 'src/types/station'
+
 export interface StationStateInterface {
-  connectedStations: unknown[],
-  currentStation?: Record<string, any>
+  connectedStations?: Station,
+  currentStation?: Station
 }
 
 function state(): StationStateInterface {
-  return {
-    connectedStations: []
-  }
+  return {}
 }
 
 export default state

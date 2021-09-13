@@ -1,11 +1,11 @@
 <template>
   <q-page padding>
-    <q-tabs active-bg-color="primary" active-color="white" v-model="currentTab">
-      <q-tab :key="i" :label="`station ${i}`" :name="i" v-for="i in 6"/>
-    </q-tabs>
-    <div class="q-pa-md"/>
-    <q-tab-panels class="q-card" style="min-height: 500px" v-model="currentTab">
-      <q-tab-panel :key="i" :name="i" class="column absolute-full" v-for="i in 6">
+<!--    <q-tabs active-bg-color="primary" active-color="white" v-model="currentTab">-->
+<!--      <q-tab :key="i" :label="`station ${i}`" :name="i" v-for="i in 6"/>-->
+<!--    </q-tabs>-->
+<!--    <div class="q-pa-md"/>-->
+<!--    <q-tab-panels class="q-card" style="min-height: 500px" v-model="currentTab">-->
+<!--      <q-tab-panel :key="i" :name="i" class="column absolute-full" v-for="i in 6">-->
         <section>
           <div>Informacion referente a estacion {{i}}</div>
           <pre style="font-family: 'Raleway Medium', sans-serif">
@@ -21,8 +21,8 @@
           <q-btn color="negative" label="Borrar datos"/>
           <q-btn color="secondary" label="Descargar datos"/>
         </section>
-      </q-tab-panel>
-    </q-tab-panels>
+<!--      </q-tab-panel>-->
+<!--    </q-tab-panels>-->
   </q-page>
 </template>
 

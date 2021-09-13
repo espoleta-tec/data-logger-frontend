@@ -1,6 +1,5 @@
 <template>
   <div class="q-pa-md row">
-    {{current}}
     <div class="col-12 col-md-6 q-pa-md">
       <q-input v-model="current.ip" hint="192.168.1.1" label="Ip"/>
     </div>

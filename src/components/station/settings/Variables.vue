@@ -31,7 +31,6 @@
   export default defineComponent({
     name: 'variables',
     setup() {
-      const precipitationReadingInterval = ref(1)
       const readInterval = ref(1)
       const actualReadInterval = (val: number) => {
         return val * 5

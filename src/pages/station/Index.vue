@@ -15,8 +15,7 @@
     </section>
     <section :class="['grid grid-cols-1 grid-rows-auto',
     {'grid-cols-2': $q.screen.sm},
-    {'grid-cols-3': $q.screen.md},
-    {'grid-cols-4': $q.screen.lg}]">
+    {'grid-cols-3': $q.screen.gt.sm}]">
       <station-card :station="station" :key="station" class="col-12 col-sm-6 col-lg-4" v-for="station in stations"/>
       <skeleton-station-card class="col-12 col-sm-6 col-lg-4"/>
     </section>

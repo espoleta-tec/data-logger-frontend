@@ -34,7 +34,8 @@
       const store = useStore()
 
       const deleteStation = async () => {
-        await api.delete(`/station/${+props.station?.id || -1}`)
+        await api.delete(`/station/${+props.station?.id}`)
+        window.location.reload()
       }
 
       const showDialog = computed({
