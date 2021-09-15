@@ -5,7 +5,6 @@ import layout from './layout'
 import { LayoutStateInterface } from 'src/store/layout/state'
 import station from './station'
 import { StationStateInterface } from 'src/store/station/state'
-import createPersistedState from 'vuex-persistedstate'
 
 // import example from './module-example'
 // import { ExampleStateInterface } from './module-example/state';
@@ -49,7 +48,7 @@ export default store(function(/* { ssrContext } */) {
     // strict: !!process.env.DEBUGGING
     strict: false,
 
-    plugins: [createPersistedState()]
+    plugins: []
   })
 })
 

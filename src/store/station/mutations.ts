@@ -15,12 +15,12 @@ const mutation: MutationTree<StationStateInterface> = {
   },
   loadAvailableStations(state: StationStateInterface, payload: Station[]) {
     state.availableStations = plainToClass(Station, payload)
-    // state.availableStations.map((available, i) => {
-    //   const cond = state.connectedStations.find(connected => connected.id === available.id)
-    //   if (cond) {
-    //     state.availableStations[i] = cond
-    //   }
-    // })
+    state.availableStations.map((available, i) => {
+      const cond = state.connectedStations.find(connected => connected.id === available.id)
+      if (cond) {
+        state.availableStations[i] = cond
+      }
+    })
   }
 }
 

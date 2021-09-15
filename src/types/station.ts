@@ -10,35 +10,35 @@ export enum ConnectionStatusEnum {
 }
 
 export class StationSettings {
-  id: number | undefined
+  id = -1
 
-  generalReadDelay: number | undefined
+  generalReadDelay = 0
 
-  precipitationReadDelay: string | undefined
+  precipitationReadDelay = ''
 
-  username: string | undefined
+  username = 'admin'
 
-  password: string | undefined
+  password = 'adminpassword'
 }
 
 
 export class Station {
-  id: number | undefined
+  id = -1
 
-  ip: string | undefined
+  ip = '192.168.4.1'
 
-  ipMask: string | undefined
+  ipMask = '255.255.255.0'
 
-  ssid: string | undefined
+  ssid = 'station-ap'
 
-  password: string | undefined
+  password = 'ap-password'
 
-  hostname: string | undefined
+  hostname = 'station-0'
 
-  connectionMode: OperationModeEnum | undefined
+  connectionMode: OperationModeEnum = OperationModeEnum.AP
 
 
-  Settings: StationSettings | undefined
+  Settings: StationSettings = new StationSettings()
 
   ws?: WebSocket
 
