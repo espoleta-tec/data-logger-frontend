@@ -1,7 +1,7 @@
 <template>
   <q-dialog persistent>
     <q-card class="flex" style="width: 80vw; max-width: 1280px; height: 80vh; max-height: 80vh;">
-      <q-form @cancel="closeDialog" @submit="closeDialog" class="col column">
+      <q-form @cancel="cancel" @submit="closeDialog" class="col column">
         <q-card-section class="col-auto">
           <div class="text-h5">Editar parametros de estacion</div>
         </q-card-section>
@@ -19,7 +19,7 @@
         </q-card-section>
         <q-card-section class="col-auto text-right q-gutter-md">
           <q-btn color="positive" label="save" type="submit" v-close-popup/>
-          <q-btn color="negative" label="cancel" type="cancel" v-close-popup/>
+          <q-btn color="negative" label="cancel" @click="cancel" v-close-popup/>
         </q-card-section>
       </q-form>
     </q-card>
@@ -42,10 +42,14 @@
         await store.dispatch('station/saveCurrentStation')
       }
 
+      const cancel = () => {
+        store.commit('station/mutateKey')
+      }
+
       const currentTab = ref(tabs[0])
 
       return {
-        closeDialog, currentTab, tabs
+        closeDialog, currentTab, tabs, cancel
       }
     }
   })

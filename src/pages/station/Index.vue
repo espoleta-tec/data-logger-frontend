@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, onBeforeUpdate, onMounted, ref } from 'vue'
+  import { computed, defineComponent, onBeforeUpdate, onMounted } from 'vue'
   import StationCard from 'components/station/StationCard.vue'
   import SkeletonStationCard from 'components/station/SkeletonStationCard.vue'
   import { api } from 'boot/axios'
@@ -43,10 +43,8 @@
       }
     },
     setup() {
-      const key = ref(0)
       const store = useStore()
       const loadData = async () => {
-        console.log('stuff')
         const { data } = await api.get('/station')
         store.commit('station/loadAvailableStations', data)
       }
@@ -55,7 +53,6 @@
       onBeforeUpdate(() => loadData())
 
       const pageKey = computed(() => {
-        key.value = store.state.station.moduleKey
         return store.state.station.moduleKey
       })
       return { pageKey }
