@@ -14,6 +14,7 @@
   import { computed, defineComponent, ref } from 'vue'
   import Settings from 'components/station/Settings.vue'
   import { useStore } from 'src/store'
+  import { Station } from 'src/types/station'
 
   export default defineComponent({
     // name: 'ComponentName'
@@ -21,10 +22,7 @@
       Settings
     },
     setup() {
-      const newStation = {
-        hostname: null,
-        Settings: {}
-      }
+      const newStation = new Station()
       const showDialogProp = ref(false)
       const store = useStore()
 

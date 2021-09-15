@@ -21,6 +21,9 @@ const mutation: MutationTree<StationStateInterface> = {
         state.availableStations[i] = cond
       }
     })
+  },
+  mutateKey(state: StationStateInterface) {
+    state.moduleKey++
   }
 }
 

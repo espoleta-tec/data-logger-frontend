@@ -14,7 +14,7 @@ const actions: ActionTree<StationStateInterface, StateInterface> = {
       await api.patch(`/station/${+context.state.currentStation.id}`, context.state.currentStation)
     }
 
-    window.location.reload()
+    context.commit('mutateKey')
   },
   async connectToStation(context, station: Station) {
     if (station.connectionStatus === ConnectionStatusEnum.CONNECTED) {
@@ -24,7 +24,7 @@ const actions: ActionTree<StationStateInterface, StateInterface> = {
       return
     }
     station.connectionStatus = ConnectionStatusEnum.CONNECTING
-    const url = station.ip as string
+    const url = station.ip
     const name = station.Settings?.username
     const password = station.Settings?.password
     const { data: { access_token } } = await axios.post(`http://${url}/authenticate`,

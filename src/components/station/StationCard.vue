@@ -9,7 +9,8 @@
         ['col-12 col-sm-auto text-white',
         {'bg-accent': station.connectionStatus !== ConnectionStatusEnum.CONNECTED},
         {'bg-pink-7': station.connectionStatus === ConnectionStatusEnum.CONNECTED}]"
-               @click="$store.dispatch('station/connectToStation', station)">
+               @click="$store.dispatch('station/connectToStation', station)"
+               :disabled="station.connectionStatus === ConnectionStatusEnum.CONNECTING">
           <div v-if="station.connectionStatus === ConnectionStatusEnum.CONNECTED">desconectar</div>
           <div v-if="station.connectionStatus === ConnectionStatusEnum.DISCONNECTED">conectar</div>
           <q-spinner-dots v-if="station.connectionStatus === ConnectionStatusEnum.CONNECTING"></q-spinner-dots>
@@ -44,7 +45,7 @@
 
       const deleteStation = async () => {
         await api.delete(`/station/${+props.station?.id}`)
-        window.location.reload()
+        store.commit('station/mutateKey')
       }
 
       const showDialog = computed({
