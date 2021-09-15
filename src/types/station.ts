@@ -3,6 +3,12 @@ export enum OperationModeEnum {
   STATION = 'STATION'
 }
 
+export enum ConnectionStatusEnum {
+  CONNECTED = 'CONNECTED',
+  DISCONNECTED = 'DISCONNECTED',
+  CONNECTING = 'CONNECTING'
+}
+
 export class StationSettings {
   id: number | undefined
 
@@ -33,4 +39,9 @@ export class Station {
 
 
   Settings: StationSettings | undefined
+
+  ws?: WebSocket
+
+  connectionStatus = ConnectionStatusEnum.DISCONNECTED
 }
+

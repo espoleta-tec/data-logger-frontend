@@ -1,5 +1,6 @@
 <template>
   <q-page padding>
+    {{$store.state.station.connectedStations}}
     <section>
       <q-toolbar class="justify-end">
         <q-card bordered class="q-pl-md q-pr-md q-pa-sm" style="border-radius: 9999px">
@@ -16,17 +17,19 @@
     <section :class="['grid grid-cols-1 grid-rows-auto',
     {'grid-cols-2': $q.screen.sm},
     {'grid-cols-3': $q.screen.gt.sm}]">
-      <station-card :station="station" :key="station" class="col-12 col-sm-6 col-lg-4" v-for="station in stations"/>
+      <station-card :station="station" :key="station" class="col-12 col-sm-6 col-lg-4"
+                    v-for="station in $store.state.station.availableStations"/>
       <skeleton-station-card class="col-12 col-sm-6 col-lg-4"/>
     </section>
   </q-page>
 </template>
 
 <script lang="ts">
-  import { defineComponent, onBeforeMount, ref } from 'vue'
+  import { defineComponent, onBeforeMount } from 'vue'
   import StationCard from 'components/station/StationCard.vue'
   import SkeletonStationCard from 'components/station/SkeletonStationCard.vue'
   import { api } from 'boot/axios'
+  import { useStore } from 'src/store'
 
   export default defineComponent({
     // name: 'PageName'
@@ -39,19 +42,12 @@
       }
     },
     setup() {
-      let stations = ref([])
-
+      const store = useStore()
       onBeforeMount(async () => {
         const { data } = await api.get('/station')
 
-        stations.value = data
+        store.commit('station/loadAvailableStations', data)
       })
-
-      return { stations }
     }
   })
 </script>
-
-<style lang="scss">
-
-</style>

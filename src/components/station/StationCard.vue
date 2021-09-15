@@ -5,7 +5,15 @@
         <span>{{station.hostname}}</span>
       </q-card-section>
       <q-card-section class="row justify-end q-gutter-sm">
-        <q-btn class="col-12 col-sm-auto" color="accent" label="connect"/>
+        <q-btn :class="
+        ['col-12 col-sm-auto text-white',
+        {'bg-accent': station.connectionStatus !== ConnectionStatusEnum.CONNECTED},
+        {'bg-pink-7': station.connectionStatus === ConnectionStatusEnum.CONNECTED}]"
+               @click="$store.dispatch('station/connectToStation', station)">
+          <div v-if="station.connectionStatus === ConnectionStatusEnum.CONNECTED">desconectar</div>
+          <div v-if="station.connectionStatus === ConnectionStatusEnum.DISCONNECTED">conectar</div>
+          <q-spinner-dots v-if="station.connectionStatus === ConnectionStatusEnum.CONNECTING"></q-spinner-dots>
+        </q-btn>
         <q-btn @click="showDialog = true" icon="edit"/>
         <q-btn color="negative" icon="delete" @click="deleteStation"/>
       </q-card-section>
@@ -20,6 +28,7 @@
   import Settings from 'components/station/Settings.vue'
   import { useStore } from 'src/store'
   import { api } from 'boot/axios'
+  import { ConnectionStatusEnum } from 'src/types/station'
 
   export default defineComponent({
     // name: 'ComponentName'
@@ -49,7 +58,7 @@
       })
 
       return {
-        showDialog, deleteStation
+        showDialog, deleteStation, ConnectionStatusEnum
       }
     }
   })
