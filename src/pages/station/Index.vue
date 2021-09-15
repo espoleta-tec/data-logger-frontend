@@ -1,7 +1,7 @@
-<template>
+<template :key="pageKey">
   <q-page padding>
     {{$store.state.station.connectedStations}}
-    {{$store.state.station.moduleKey}}
+    {{pageKey}}
     <section>
       <q-toolbar class="justify-end">
         <q-card bordered class="q-pl-md q-pr-md q-pa-sm" style="border-radius: 9999px">
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onBeforeMount } from 'vue'
+  import { computed, defineComponent, onBeforeMount } from 'vue'
   import StationCard from 'components/station/StationCard.vue'
   import SkeletonStationCard from 'components/station/SkeletonStationCard.vue'
   import { api } from 'boot/axios'
@@ -49,6 +49,11 @@
 
         store.commit('station/loadAvailableStations', data)
       })
+
+      const pageKey = computed(() => {
+        return store.state.station.moduleKey
+      })
+      return { pageKey }
     }
   })
 </script>
