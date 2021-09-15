@@ -4,7 +4,7 @@
       <q-card-section class="bg-primary text-white text-h2" style="height: 70%">
         30 C
       </q-card-section>
-      <q-card-section>Estacion 1</q-card-section>
+      <q-card-section>{{station.hostname}}</q-card-section>
     </q-card>
   </div>
 </template>
@@ -15,7 +15,8 @@
   export default defineComponent({
     // name: 'ComponentName'
     props: {
-      to: String
+      to: String,
+      station: Object
     }
   })
 </script>

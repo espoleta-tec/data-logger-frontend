@@ -1,7 +1,7 @@
 <template>
   <q-page class="column" padding>
     <section class="col-auto q-pa-md">
-      Detalles de estacion {{id}}
+      Detalles de estacion <span class="text-weight-bolder text-h5">{{stationToRead.hostname}}</span>
     </section>
     <section>
       <q-tabs v-model="currentTab">
@@ -24,10 +24,11 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref } from 'vue'
+  import { computed, defineComponent, ref } from 'vue'
   import { StationVariableDto } from 'src/dto/station-variable.dto'
   import SampleGraphic from 'components/graphs/SampleGraphic.vue'
   import Radar from 'components/graphs/Radar.vue'
+  import { useStore } from 'src/store'
 
   const tabs = Object.getOwnPropertyNames(new StationVariableDto())
   tabs.push('transpiration')
@@ -38,13 +39,21 @@
       SampleGraphic, Radar
     },
     props: {
-      id: Number
+      id: {
+        type: Number,
+        required: true
+      }
     },
-    setup() {
+    setup(props) {
       const currentTab = ref(tabs[0])
+      const store = useStore()
+      const stationToRead = computed(() => {
+        let sta = store.state.station.availableStations.find(sta => sta.id === +props.id)
+        return sta
+      })
 
       return {
-        tabs, currentTab
+        tabs, currentTab, stationToRead
       }
     }
   })

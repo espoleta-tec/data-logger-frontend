@@ -1,7 +1,5 @@
 <template>
   <q-page padding :key="$store.state.station.moduleKey">
-    {{$store.state.station.connectedStations}}
-    {{pageKey}}
     <section>
       <q-toolbar class="justify-end">
         <q-card bordered class="q-pl-md q-pr-md q-pa-sm" style="border-radius: 9999px">
@@ -41,21 +39,6 @@
       return {
         filter: ''
       }
-    },
-    setup() {
-      const store = useStore()
-      const loadData = async () => {
-        const { data } = await api.get('/station')
-        store.commit('station/loadAvailableStations', data)
-      }
-
-      onMounted(() => loadData())
-      onBeforeUpdate(() => loadData())
-
-      const pageKey = computed(() => {
-        return store.state.station.moduleKey
-      })
-      return { pageKey }
     }
   })
 </script>
