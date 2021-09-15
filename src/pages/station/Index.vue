@@ -1,4 +1,4 @@
-<template :key="pageKey">
+<template :key="key">
   <q-page padding>
     {{$store.state.station.connectedStations}}
     {{pageKey}}
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, onBeforeMount } from 'vue'
+  import { computed, defineComponent, onMounted, ref } from 'vue'
   import StationCard from 'components/station/StationCard.vue'
   import SkeletonStationCard from 'components/station/SkeletonStationCard.vue'
   import { api } from 'boot/axios'
@@ -43,14 +43,16 @@
       }
     },
     setup() {
+      const key = ref(0)
       const store = useStore()
-      onBeforeMount(async () => {
+      onMounted(async () => {
+        console.log('stuff')
         const { data } = await api.get('/station')
-
         store.commit('station/loadAvailableStations', data)
       })
 
       const pageKey = computed(() => {
+        key.value = store.state.station.moduleKey
         return store.state.station.moduleKey
       })
       return { pageKey }

@@ -10,7 +10,7 @@ export enum ConnectionStatusEnum {
 }
 
 export class StationSettings {
-  id = null
+  id: number | null = null
 
   generalReadDelay = 0
 
@@ -23,7 +23,7 @@ export class StationSettings {
 
 
 export class Station {
-  id = null
+  id: number | null = null
 
   ip = '192.168.4.1'
 

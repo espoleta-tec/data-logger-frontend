@@ -4,9 +4,9 @@
       <q-card-section class="bg-primary text-white text-h6">
         <span>{{station.hostname}}</span>
       </q-card-section>
-      <q-card-section class="row justify-end q-gutter-sm">
+      <q-card-section class="grid grid-cols-3 grid-gap-6">
         <q-btn :class="
-        ['col-12 col-sm-auto text-white',
+        ['col-12 col-sm-auto text-white grid-col-span-3',
         {'bg-accent': station.connectionStatus !== ConnectionStatusEnum.CONNECTED},
         {'bg-pink-7': station.connectionStatus === ConnectionStatusEnum.CONNECTED}]"
                @click="$store.dispatch('station/connectToStation', station)"
@@ -14,6 +14,11 @@
           <div v-if="station.connectionStatus === ConnectionStatusEnum.CONNECTED">desconectar</div>
           <div v-if="station.connectionStatus === ConnectionStatusEnum.DISCONNECTED">conectar</div>
           <q-spinner-dots v-if="station.connectionStatus === ConnectionStatusEnum.CONNECTING"></q-spinner-dots>
+        </q-btn>
+        <q-btn icon="upload" color="primary">
+          <q-tooltip>
+            <div>Guardar configuracion actual</div>
+          </q-tooltip>
         </q-btn>
         <q-btn @click="showDialog = true" icon="edit"/>
         <q-btn color="negative" icon="delete" @click="deleteStation"/>
