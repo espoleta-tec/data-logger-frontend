@@ -4,13 +4,8 @@
       <q-input v-model="current.Settings.username" label="username"></q-input>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
-      <q-input v-model="current.Settings.password" label="password"></q-input>
+      <q-input type="password" v-model="current.Settings.password" label="password"></q-input>
     </div>
-<!--    <div class="col-12 col-md-6 q-pa-md">-->
-    <!--      Max Inactive Time-->
-    <!--      <q-slider v-model="maxInactiviy"/>-->
-    <!--      {{minToHumanReadableFormat(maxInactiviy)}}-->
-    <!--    </div>-->
   </div>
 </template>
 

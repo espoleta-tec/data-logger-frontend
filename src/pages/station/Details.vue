@@ -1,7 +1,7 @@
 <template>
   <q-page class="column" padding>
     <section class="col-auto q-pa-md">
-      Detalles de estacion <span class="text-weight-bolder text-h5">{{stationToRead.hostname}}</span>
+      Detalles de estación <span class="text-weight-bolder text-h6">{{stationToRead.hostname}}</span>
     </section>
     <section>
       <q-tabs v-model="currentTab">

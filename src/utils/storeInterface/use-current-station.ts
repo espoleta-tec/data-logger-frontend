@@ -4,5 +4,5 @@ import { Station } from 'src/types/station'
 
 export function useCurrentStation() {
   const store = useStore()
-  return computed((): Station => store.state.station.currentStation as Station)
+  return computed((): Station => store.state.station.currentStation)
 }
