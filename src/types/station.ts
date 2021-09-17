@@ -23,7 +23,7 @@ export class StationSettings {
 
 
 export class Station {
-  id: number | null = null
+  id = -1
 
   ip = '192.168.4.1'
 

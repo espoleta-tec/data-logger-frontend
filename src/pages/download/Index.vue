@@ -66,6 +66,7 @@
             }
             sbj[key] = value
           })
+          sbj.StationId = station.id
           return sbj
         }).filter(sbj => Object.keys(sbj).length > 0)
         const resp = await api.post('/reading', obj)
