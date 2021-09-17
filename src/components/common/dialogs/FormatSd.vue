@@ -16,6 +16,7 @@
   import axios from 'axios'
   import { useQuasar } from 'quasar'
   import { useStore } from 'src/store'
+  import { api } from 'boot/axios'
 
   export default defineComponent({
     // name: 'ComponentName'
@@ -31,12 +32,12 @@
       const uploadConfiguration = async () => {
         const sta = props.station as Station
         const url = sta.currentUrl
-        const { data: { access_token, error } } = await axios.post(`http:${url as string}/authenticate`, {
+        const { data: { access_token, error } } = await axios.post<{ access_token: string, error: string }>(`http:${url}/authenticate`, {
           name: name.value, password: password.value
         }).catch(() => {
           return { data: { error: 'No se pudo autenticar', access_token: null } }
         })
-        if (error) {
+        if (error || !access_token) {
           q.notify({
             message: error,
             color: 'negative'
@@ -44,7 +45,11 @@
           return
         }
 
-        await store.dispatch('station/uploadConfig', { station: sta, token: access_token })
+        await api.get('/format', {
+          headers: {
+            'Authorization': `Bearer ${access_token}`
+          }
+        })
         q.notify({
           message: 'exito',
           color: 'positive'

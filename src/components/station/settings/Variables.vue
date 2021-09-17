@@ -2,23 +2,18 @@
   <div class="q-pa-md row">
     <div class="col-12 col-md-6 q-pa-md">
       <div>
-        Precipitation Reading Interval
-        <q-slider :min="1" v-model="current.Settings.precipitationReadDelay"/>
-        {{minToHumanReadableFormat(actualReadInterval(current.Settings.precipitationReadDelay))}}
+        Sensor Reading Interval
+        <q-slider :min="15" :step="15" :max="15*4*24" markers v-model="current.Settings.generalReadDelay"/>
+        {{minToHumanReadableFormat(current.Settings.generalReadDelay)}}
       </div>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
       <div>
-        Sensor Reading Interval
-        <q-slider :min="1" v-model="current.Settings.generalReadDelay"/>
-        {{minToHumanReadableFormat(actualReadInterval(current.Settings.generalReadDelay))}}
+        Precipitation Reading Interval
+        <q-slider :min="15" :step="15" :max="15*4*24" markers v-model="current.Settings.precipitationReadDelay"/>
+        {{minToHumanReadableFormat(current.Settings.precipitationReadDelay)}}
       </div>
     </div>
-    <div class="col-12 col-md-6 q-pa-md"></div>
-    <div class="col-12 col-md-6 q-pa-md"></div>
-    <div class="col-12 col-md-6 q-pa-md"></div>
-    <div class="col-12 col-md-6 q-pa-md"></div>
-    <div class="col-12 col-md-6 q-pa-md"></div>
   </div>
 </template>
 
@@ -32,12 +27,11 @@
     name: 'variables',
     setup() {
       const readInterval = ref(1)
-      const actualReadInterval = (val: number) => {
-        return val * 5
-      }
+      const current = useCurrentStation()
+
 
       return {
-        minToHumanReadableFormat, MIN_TO_MONTH, actualReadInterval, readInterval, current: useCurrentStation()
+        minToHumanReadableFormat, MIN_TO_MONTH, readInterval, current
       }
     }
   })

@@ -20,25 +20,64 @@
         </section>
         <q-space/>
         <section class="text-right q-gutter-md">
-          <q-btn color="negative" label="Borrar datos"/>
-          <q-btn color="secondary" label="Descargar datos"/>
+          <q-btn color="negative" label="Borrar datos" @click="formatData(station)"/>
+          <q-btn :disabled="!enableDownload" color="secondary" label="Descargar datos" @click="downloadData(station)"/>
         </section>
       </q-tab-panel>
     </q-tab-panels>
+    <format-sd :station="currentStation" v-model="showFormat"/>
   </q-page>
 </template>
 
 <script lang="ts">
   import { defineComponent, ref } from 'vue'
   import { useStore } from 'src/store'
+  import { Station } from 'src/types/station'
+  import axios from 'axios'
+  import { api } from 'boot/axios'
+  import FormatSd from 'components/common/dialogs/FormatSd.vue'
 
   export default defineComponent({
     // name: 'PageName'
+    components: {
+      FormatSd
+    },
     setup() {
       const store = useStore()
       const currentTab = ref(store.state.station.connectedStations?.[0]?.id || 0)
+      const enableDownload = ref(true)
+      const currentStation = ref({})
+      const showFormat = ref(false)
+
+      async function downloadData(station: Station) {
+        enableDownload.value = false
+        const { data } = await axios.get<string>(`http://${station.currentUrl}/logs`)
+        enableDownload.value = true
+
+        const obj = data.split('\r\n').map((rawReading: string) => {
+          const sbj: Record<string, string | number> = {}
+          rawReading.split(';').map((innerRead: string) => {
+            let [key, value]: (string | number)[] = innerRead.split('=')
+            if (key === undefined || value === undefined) return
+            if (!isNaN(parseFloat(value))) {
+              value = parseFloat(value)
+            } else {
+              value = value.replace(/["\\]+/g, '')
+            }
+            sbj[key] = value
+          })
+          return sbj
+        }).filter(sbj => Object.keys(sbj).length > 0)
+        const resp = await api.post('/reading', obj)
+      }
+
+      function formatData(station: Station) {
+        currentStation.value = station
+        showFormat.value = true
+      }
+
       return {
-        currentTab
+        currentTab, downloadData, enableDownload, currentStation, showFormat, formatData
       }
     }
   })

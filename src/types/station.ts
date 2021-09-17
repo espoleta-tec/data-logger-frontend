@@ -12,9 +12,9 @@ export enum ConnectionStatusEnum {
 export class StationSettings {
   id: number | null = null
 
-  generalReadDelay = 0
+  generalReadDelay = 1
 
-  precipitationReadDelay = ''
+  precipitationReadDelay = 1
 
   username = 'admin'
 
@@ -43,5 +43,9 @@ export class Station {
   ws?: WebSocket
 
   connectionStatus = ConnectionStatusEnum.DISCONNECTED
+
+  get currentUrl() {
+    return this.ws?.url.split(':')[1] || '/'
+  }
 }
 
