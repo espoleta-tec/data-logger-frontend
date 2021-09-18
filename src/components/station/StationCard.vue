@@ -38,7 +38,6 @@
   import { useStore } from 'src/store'
   import { api } from 'boot/axios'
   import { ConnectionStatusEnum } from 'src/types/station'
-  import { useQuasar } from 'quasar'
 
   export default defineComponent({
     // name: 'ComponentName'
@@ -52,7 +51,6 @@
       const showDialogProp = ref(false)
       const saveConfig = ref(false)
       const store = useStore()
-      const q = useQuasar()
 
       const deleteStation = async () => {
         await api.delete(`/station/${+props.station?.id}`)
