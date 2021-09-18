@@ -30,9 +30,9 @@
     // name: 'ComponentName'
     setup() {
       const i18n = useI18n()
-      const $route = useRoute()
+      const route = useRoute()
       const enableBack = computed(() => {
-        return $route.fullPath !== '/'
+        return route.fullPath !== '/'
       })
       const changeLanguage = (locale: string) => {
         i18n.locale.value = locale
@@ -43,7 +43,7 @@
       }
 
       return {
-        $route, enableBack, i18n, changeLanguage, closeApp
+        $route: route, enableBack, i18n, changeLanguage, closeApp
       }
     }
   })

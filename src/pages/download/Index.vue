@@ -36,6 +36,7 @@
   import axios from 'axios'
   import { api } from 'boot/axios'
   import FormatSd from 'components/common/dialogs/FormatSd.vue'
+  import { useQuasar } from 'quasar'
 
   export default defineComponent({
     // name: 'PageName'
@@ -48,11 +49,20 @@
       const enableDownload = ref(true)
       const currentStation = ref({})
       const showFormat = ref(false)
+      const q = useQuasar()
 
       async function downloadData(station: Station) {
         enableDownload.value = false
         const { data } = await axios.get<string>(`http://${station.currentUrl}/logs`)
+          .catch(() => {
+            q.notify({
+              message: 'Error al descargar registros',
+              color: 'negative'
+            })
+            return {data: null}
+          })
         enableDownload.value = true
+        if (!data) return
 
         const obj = data.split('\r\n').map((rawReading: string) => {
           const sbj: Record<string, string | number> = {}
@@ -69,8 +79,20 @@
           sbj.StationId = station.id
           return sbj
         }).filter(sbj => Object.keys(sbj).length > 1 && sbj.date)
-        console.log(obj)
-        return await api.post('/reading', obj)
+        await api.post('/reading', obj)
+          .then(() => {
+            q.notify({
+              message: 'Registros descargados',
+              color: 'positive'
+            })
+          })
+          .catch(() => {
+            q.notify({
+              message: 'Error al descargar registros',
+              color: 'negative'
+            })
+            return
+          })
       }
 
       function formatData(station: Station) {

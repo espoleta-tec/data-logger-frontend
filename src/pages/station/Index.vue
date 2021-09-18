@@ -24,11 +24,9 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, onBeforeUpdate, onMounted } from 'vue'
+  import { defineComponent } from 'vue'
   import StationCard from 'components/station/StationCard.vue'
   import SkeletonStationCard from 'components/station/SkeletonStationCard.vue'
-  import { api } from 'boot/axios'
-  import { useStore } from 'src/store'
 
   export default defineComponent({
     // name: 'PageName'
