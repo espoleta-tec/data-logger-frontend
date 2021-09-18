@@ -1,8 +1,8 @@
 <template>
-  <div class="text-white q-pa-md">
-    <slot name="title"></slot>
-    <apexchart :options="chartOptions" :series="series" height="100%" width="100%"/>
-  </div>
+    <div class="text-black q-pa-md full-width">
+        <slot name="title"></slot>
+        <apexchart :options="chartOptions" :series="series" height="100%" width="100%"/>
+    </div>
 </template>
 
 <script lang="ts">
@@ -18,15 +18,20 @@
     components: {
       apexchart: VueApexCharts
     },
-
-    setup() {
+    props: {
+      data: {
+        type: Object,
+        required: true
+      }
+    },
+    setup(props) {
       const chartOptions: ApexOptions = {
         chart: {
           type: 'area'
 
         },
         xaxis: {
-          categories: ['Ene', 'Feb', 'Mar', 'Aprl', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+          type: 'datetime'
         }
 
       }
@@ -34,7 +39,10 @@
       const series: ApexAxisChartSeries = [
         {
           name: 'series-1',
-          data: [30, 40, 35, 50, 30, 80, 40, 40],
+          data: props.data.map((reading: { date: string, reading: number }) => ({
+            x: reading.date,
+            y: reading.reading
+          })),
           color: palette('blue-7')
         }
       ]

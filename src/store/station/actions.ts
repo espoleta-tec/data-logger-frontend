@@ -57,6 +57,12 @@ const actions: ActionTree<StationStateInterface, StateInterface> = {
     const { ws, id, ...object } = station
     const payload2Send = `<config>${JSON.stringify(object)}</config>token=${token}`
     ws?.send(payload2Send)
+  },
+  syncTime(context, station: Station) {
+    const updateMessage = `time=${Math.floor(Date.now() / 1000)}`
+    console.log(`${Date.now()} ${updateMessage}`)
+    console.log(Intl.DateTimeFormat().format(Date.now()))
+    station.ws?.send(updateMessage)
   }
 }
 

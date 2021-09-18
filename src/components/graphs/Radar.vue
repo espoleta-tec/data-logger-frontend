@@ -1,20 +1,23 @@
 <template>
-  <div class="text-white q-pa-md column">
-    <div class="col-1"></div>
-    <div class="col">
-      <apexchart :options="chartOptions" :series="series" height="100%" width="100%"/>
-    </div>
-    <div class="col-auto text-black row justify-evenly">
-      <div class="col-12 col-sm-6 row flex-center">
-        <div class="q-pr-sm">From:</div>
-        <q-input type="date"/>
-      </div>
-      <div class="col-12 col-md-6 row flex-center">
-        <div class="q-pr-sm">To:</div>
-        <q-input type="date"/>
-      </div>
-    </div>
+  <div class="text-black">
+    {{data}}
   </div>
+<!--  <div class="text-black q-pa-md column">-->
+<!--    <div class="col-1"></div>-->
+<!--    <div class="col">-->
+<!--      <apexchart :options="chartOptions" :series="series" height="100%" width="100%"/>-->
+<!--    </div>-->
+<!--    <div class="col-auto text-black row justify-evenly">-->
+<!--      <div class="col-12 col-sm-6 row flex-center">-->
+<!--        <div class="q-pr-sm">From:</div>-->
+<!--        <q-input type="date"/>-->
+<!--      </div>-->
+<!--      <div class="col-12 col-md-6 row flex-center">-->
+<!--        <div class="q-pr-sm">To:</div>-->
+<!--        <q-input type="date"/>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
 </template>
 
 <script lang="ts">
@@ -30,7 +33,9 @@
     components: {
       apexchart: VueApexCharts
     },
-
+    props: {
+      data: Object
+    },
     setup() {
       const chartOptions: ApexOptions = {
         chart: {

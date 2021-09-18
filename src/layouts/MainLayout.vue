@@ -22,6 +22,10 @@
     components: {
       Drawer, Header
     },
+    async preFetch({ store }) {
+      const { data } = await api.get('/station')
+      store.commit('station/loadAvailableStations', data)
+    },
 
     setup() {
       const leftDrawerOpen = ref(true)

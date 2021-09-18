@@ -9,11 +9,11 @@
       </q-tabs>
     </section>
     <section class="q-pa-lg col flex">
-      <q-tab-panels class="col" v-model="currentTab">
+      <q-tab-panels class="col" v-model="currentTab" :key="readings.length">
         <q-tab-panel :key="p" :name="p" class="flex" v-for="p in tabs">
           <q-card class="col row">
-            <Radar class="col-12 col-md" v-if="p.toLowerCase().indexOf('wind') !== -1"/>
-            <SampleGraphic class="col-12 col-md">
+            <Radar :data="'lol'" class="col-12 col-md" v-if="p === 'windDirection'"/>
+            <SampleGraphic :data="selectVariable(p)" class="col-12 col-md" v-else>
               <template v-slot:title>{{p}}</template>
             </SampleGraphic>
           </q-card>
@@ -24,14 +24,14 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref } from 'vue'
+  import { computed, defineComponent, onBeforeMount, onBeforeUpdate, onMounted, Ref, ref } from 'vue'
   import { StationVariableDto } from 'src/dto/station-variable.dto'
   import SampleGraphic from 'components/graphs/SampleGraphic.vue'
   import Radar from 'components/graphs/Radar.vue'
   import { useStore } from 'src/store'
+  import { api } from 'boot/axios'
 
   const tabs = Object.getOwnPropertyNames(new StationVariableDto())
-  tabs.push('transpiration')
 
   export default defineComponent({
     // name: 'PageName'
@@ -40,20 +40,46 @@
     },
     props: {
       id: {
-        type: Number,
+        type: String,
         required: true
       }
     },
-    setup(props) {
+    setup: function(props) {
       const currentTab = ref(tabs[0])
       const store = useStore()
       const stationToRead = computed(() => {
-        let sta = store.state.station.availableStations.find(sta => sta.id === +props.id)
-        return sta
+        return store.state.station.availableStations.find(sta => sta.id === +props.id)
+      })
+      const mounted = ref(false)
+
+      const readings: Ref<(StationVariableDto &
+        { date: Date, [index: string]: string | number | Date })[]> = ref([])
+
+      const selectVariable = (key: string) => {
+        return readings.value.filter(reading => !!(reading[key]))
+          .map(reading => ({ date: reading.date, reading: reading[key] }))
+      }
+
+      const loadData = async () => {
+        const { data } = await api.get<StationVariableDto[]>('/reading')
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        readings.value = data as any
+      }
+
+      onBeforeMount(async () => {
+        await loadData()
+      })
+
+      onBeforeUpdate(async () => {
+        await loadData()
+      })
+
+      onMounted(() => {
+        mounted.value = true
       })
 
       return {
-        tabs, currentTab, stationToRead
+        tabs, currentTab, stationToRead, readings, selectVariable, mounted
       }
     }
   })

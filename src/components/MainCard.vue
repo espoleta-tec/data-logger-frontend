@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md flex items-stretch content-stretch darken">
     <q-card @click="$router.push(to)" class="col cursor-pointer" style="min-height: 15rem" v-ripple>
-      <q-card-section class="bg-primary text-white text-h2" style="height: 70%">
+      <q-card-section class="bg-primary text-white text-h4" style="height: 70%">
         {{station.hostname}}
       </q-card-section>
       <q-card-section :class="[{'text-positive': connected}]">{{station.ip}}</q-card-section>

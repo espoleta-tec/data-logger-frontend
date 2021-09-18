@@ -4,9 +4,9 @@
       <q-card-section class="bg-primary text-white text-h6">
         <span>{{station.hostname}}</span>
       </q-card-section>
-      <q-card-section class="grid grid-cols-3 grid-gap-6">
+      <q-card-section class="grid grid-cols-4 grid-gap-6">
         <q-btn :class="
-        ['text-white grid-col-span-3',
+        ['text-white grid-col-span-4',
         {'bg-accent': station.connectionStatus !== ConnectionStatusEnum.CONNECTED},
         {'bg-pink-7': station.connectionStatus === ConnectionStatusEnum.CONNECTED}]"
                @click="$store.dispatch('station/connectToStation', station)"
@@ -18,14 +18,18 @@
         <q-btn v-if="station.connectionStatus === ConnectionStatusEnum.CONNECTED" icon="upload" color="primary"
                @click="uploadConfiguration">
           <q-tooltip>
-            <div>Guardar configuracion actual</div>
+            <div>Guardar configuración actual</div>
+          </q-tooltip>
+        </q-btn>
+        <q-btn v-if="station.connectionStatus === ConnectionStatusEnum.CONNECTED" icon="watch_later" @click="$store.dispatch('station/syncTime', station)">
+          <q-tooltip>
+            Sincronizar hora de la computadora con la estación
           </q-tooltip>
         </q-btn>
         <q-btn @click="showDialog = true" icon="edit"/>
         <q-btn color="negative" icon="delete" @click="deleteStation"/>
       </q-card-section>
     </q-card>
-
     <settings v-model="showDialog" :key="showDialog"/>
     <save-config v-model="saveConfig" :station="station"/>
   </div>
