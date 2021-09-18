@@ -45,7 +45,7 @@
           return
         }
 
-        await api.get('/format', {
+        await axios.get(`http://${url}/format`, {
           headers: {
             'Authorization': `Bearer ${access_token}`
           }

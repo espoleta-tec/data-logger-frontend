@@ -14,6 +14,7 @@
           </q-item>
         </q-list>
       </q-btn-dropdown>
+      <q-btn label="Cerrar" color="pink-7" @click="closeApp"/>
     </q-toolbar>
   </q-header>
 </template>
@@ -22,6 +23,7 @@
   import { computed, defineComponent } from 'vue'
   import { useRoute } from 'vue-router'
   import { useI18n } from 'vue-i18n'
+  import { api } from 'boot/axios'
 
 
   export default defineComponent({
@@ -35,9 +37,13 @@
       const changeLanguage = (locale: string) => {
         i18n.locale.value = locale
       }
+      const closeApp = async () => {
+        await api.get('shutdown')
+        window.location.reload()
+      }
 
       return {
-        $route, enableBack, i18n, changeLanguage
+        $route, enableBack, i18n, changeLanguage, closeApp
       }
     }
   })

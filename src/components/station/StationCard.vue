@@ -70,7 +70,7 @@
       })
 
 
-      const uploadConfiguration = async () => {
+      const uploadConfiguration = () => {
         saveConfig.value = true
       }
 

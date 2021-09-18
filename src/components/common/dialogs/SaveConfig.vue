@@ -31,7 +31,7 @@
       const uploadConfiguration = async () => {
         const sta = props.station as Station
         const url = sta.currentUrl
-        const { data: { access_token, error } } = await axios.post(`http:${url as string}/authenticate`, {
+        const { data: { access_token, error } } = await axios.post(`http:${url}/authenticate`, {
           name: name.value, password: password.value
         }).catch(() => {
           return { data: { error: 'No se pudo autenticar', access_token: null } }

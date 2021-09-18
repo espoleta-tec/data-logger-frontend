@@ -51,11 +51,11 @@ const actions: ActionTree<StationStateInterface, StateInterface> = {
       station.connectionStatus = ConnectionStatusEnum.DISCONNECTED
     }
   },
-  uploadConfig(context, { station, token }) {
+  uploadConfig(context, { station, token }: { station: Station, token: string }) {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { ws, id, ...object } = station
-    const payload2Send = `<config>${JSON.stringify(object)}</config>token=${token as string}`
+    const payload2Send = `<config>${JSON.stringify(object)}</config>token=${token}`
     ws?.send(payload2Send)
   }
 }

@@ -68,8 +68,9 @@
           })
           sbj.StationId = station.id
           return sbj
-        }).filter(sbj => Object.keys(sbj).length > 0)
-        const resp = await api.post('/reading', obj)
+        }).filter(sbj => Object.keys(sbj).length > 1 && sbj.date)
+        console.log(obj)
+        return await api.post('/reading', obj)
       }
 
       function formatData(station: Station) {

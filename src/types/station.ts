@@ -40,7 +40,7 @@ export class Station {
 
   Settings: StationSettings = new StationSettings()
 
-  ws?: WebSocket
+  ws?: WebSocket = undefined
 
   connectionStatus = ConnectionStatusEnum.DISCONNECTED
 
