@@ -1,27 +1,24 @@
 <template>
-  <div class="text-black">
-    {{data}}
+  <div class="text-black q-pa-md column">
+    <div class="col-1"></div>
+    <div class="col">
+      <apexchart :options="chartOptions" :series="series" height="100%" width="100%"/>
+    </div>
+    <div class="col-auto text-black row justify-evenly">
+      <div class="col-12 col-sm-6 row flex-center">
+        <div class="q-pr-sm">Desde:</div>
+        <q-input type="date" v-model="minDate"/>
+      </div>
+      <div class="col-12 col-md-6 row flex-center">
+        <div class="q-pr-sm">To:</div>
+        <q-input type="date" v-model="maxDate"/>
+      </div>
+    </div>
   </div>
-<!--  <div class="text-black q-pa-md column">-->
-<!--    <div class="col-1"></div>-->
-<!--    <div class="col">-->
-<!--      <apexchart :options="chartOptions" :series="series" height="100%" width="100%"/>-->
-<!--    </div>-->
-<!--    <div class="col-auto text-black row justify-evenly">-->
-<!--      <div class="col-12 col-sm-6 row flex-center">-->
-<!--        <div class="q-pr-sm">From:</div>-->
-<!--        <q-input type="date"/>-->
-<!--      </div>-->
-<!--      <div class="col-12 col-md-6 row flex-center">-->
-<!--        <div class="q-pr-sm">To:</div>-->
-<!--        <q-input type="date"/>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  import { computed, defineComponent, ref } from 'vue'
   import { colors } from 'quasar'
   import VueApexCharts from 'vue3-apexcharts'
   import ApexOptions = ApexCharts.ApexOptions
@@ -36,14 +33,40 @@
     props: {
       data: Object
     },
-    setup() {
+    setup(props) {
+      const categoriesHeaders = ['norte', 'noreste', 'este', 'sureste', 'sur', 'suroeste', 'oeste', 'noroeste']
+      const minDate = ref(new Date(0))
+      const maxDate = ref(new Date())
+
+      const categories = computed(() => {
+        const categories = {}
+        props.data
+          .filter(r => {
+            return new Date(r.date).getTime() > new Date(minDate.value).getTime()
+          })
+          .filter(r => {
+            return new Date(r.date).getTime() < new Date().setDate(new Date(maxDate.value).getDate() + 1)
+          })
+          .map(r => {
+            if (!categories[r.reading]) {
+              categories[r.reading] = 1
+            } else {
+              categories[r.reading]++
+            }
+          })
+
+        return categoriesHeaders.map(h => {
+          return categories[h] || 0
+        })
+      })
+
       const chartOptions: ApexOptions = {
         chart: {
           type: 'radar'
 
         },
         xaxis: {
-          categories: ['N', 'NE', 'E', 'SE', 'S', 'SO', 'O', 'NO']
+          categories: categoriesHeaders
         }
 
       }
@@ -51,13 +74,13 @@
       const series: ApexAxisChartSeries = [
         {
           name: 'series-1',
-          data: [30, 40, 35, 50, 30, 80, 40, 40],
+          data: categories,
           color: palette('blue-7')
         }
       ]
 
       return {
-        chartOptions, series
+        chartOptions, series, categories, minDate, maxDate
       }
     }
   })

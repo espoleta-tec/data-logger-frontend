@@ -3,5 +3,5 @@ import esEs from './es-ES'
 
 export default {
   'en-US': enUS,
-  'es-ES': esEs
+  'es-ES': esEs,
 }

@@ -12,9 +12,9 @@
       <q-tab-panels class="col" v-model="currentTab" :key="readings.length">
         <q-tab-panel :key="p" :name="p" class="flex" v-for="p in tabs">
           <q-card class="col row">
-            <Radar :data="'lol'" class="col-12 col-md" v-if="p === 'windDirection'"/>
+            <Radar :data="selectVariable(p)" class="col-12 col-md" v-if="p === 'windDirection'"/>
             <SampleGraphic :data="selectVariable(p)" class="col-12 col-md" v-else>
-              <template v-slot:title>{{p}}</template>
+              <template v-slot:title></template>
             </SampleGraphic>
           </q-card>
         </q-tab-panel>

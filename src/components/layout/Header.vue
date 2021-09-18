@@ -5,7 +5,7 @@
       <q-btn @click="$router.push('/')" flat icon="home"/>
       <q-btn @click="$router.go(-1)" flat icon="chevron_left" label="back" v-if="enableBack"/>
       <q-space/>
-      <q-btn-dropdown flat icon="language">
+      <q-btn-dropdown flat icon="language" v-if="false">
         <q-list>
           <q-item :key="lang" @click="changeLanguage(lang)" clickable v-for="lang in i18n.availableLocales" v-ripple>
             <q-item-section>
