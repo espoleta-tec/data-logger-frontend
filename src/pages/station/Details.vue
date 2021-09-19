@@ -58,7 +58,7 @@
       const selectVariable = (key: string) => {
         return readings.value.filter(reading => !!(reading[key]))
           .map(reading => ({
-            date: reading.date,
+            date: new Date(reading.date),
             reading: reading[key]
           }))
       }

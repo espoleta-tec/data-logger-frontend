@@ -4,7 +4,7 @@
       <q-input v-model="current.hostname" label="hostname"/>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
-      <q-input :disable="current.connectionMode === STATION" v-model="current.ip" hint="192.168.1.1" label="Ip"/>
+      <q-input v-model="current.ip" hint="192.168.1.1" label="Ip"/>
     </div>
     <div class="col-12 col-md-6 q-pa-md" v-if="false">
       <q-input v-model="current.ipMask" label="Ip Mask"/>
