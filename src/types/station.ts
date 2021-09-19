@@ -27,6 +27,8 @@ export class Station {
 
   ip = '192.168.4.1'
 
+  gateway = '192.168.4.1'
+
   ipMask = '255.255.255.0'
 
   ssid = 'station-ap'
