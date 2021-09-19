@@ -30,6 +30,7 @@
   import Radar from 'components/graphs/Radar.vue'
   import { useStore } from 'src/store'
   import { api } from 'boot/axios'
+  import { utcToZonedTime } from 'date-fns-tz'
 
   const tabs = Object.getOwnPropertyNames(new StationVariableDto())
 
@@ -57,10 +58,14 @@
 
       const selectVariable = (key: string) => {
         return readings.value.filter(reading => !!(reading[key]))
-          .map(reading => ({
-            date: new Date(reading.date),
-            reading: reading[key]
-          }))
+          .map(reading => {
+            console.log(utcToZonedTime(reading.date, Intl.DateTimeFormat()
+              .resolvedOptions().timeZone).toString())
+            return {
+              date: reading.date,
+              reading: reading[key]
+            }
+          })
       }
 
       const loadData = async () => {
