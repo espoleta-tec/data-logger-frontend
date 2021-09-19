@@ -15,7 +15,6 @@
   import { Station } from 'src/types/station'
   import axios from 'axios'
   import { useQuasar } from 'quasar'
-  import { useStore } from 'src/store'
 
   export default defineComponent({
     // name: 'ComponentName'
@@ -26,7 +25,6 @@
       const name = ref('')
       const password = ref('')
       const q = useQuasar()
-      const store = useStore()
 
       const uploadConfiguration = async () => {
         const sta = props.station as Station

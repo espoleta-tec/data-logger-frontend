@@ -1,9 +1,12 @@
 <template>
   <div class="q-pa-md row">
     <div class="col-12 col-md-6 q-pa-md">
-      <q-input v-model="current.ip" hint="192.168.1.1" label="Ip"/>
+      <q-input v-model="current.hostname" label="hostname"/>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
+      <q-input :disable="current.connectionMode === STATION" v-model="current.ip" hint="192.168.1.1" label="Ip"/>
+    </div>
+    <div class="col-12 col-md-6 q-pa-md" v-if="false">
       <q-input v-model="current.ipMask" label="Ip Mask"/>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
@@ -12,21 +15,18 @@
     <div class="col-12 col-md-6 q-pa-md">
       <q-input v-model="current.password" label="Password" type="password"/>
     </div>
-    <div class="col-12 col-md-6 q-pa-md">
-      <q-input v-model="current.hostname" label="hostname"/>
-    </div>
-    <div class="col-12 col-md-6 q-pa-md flex justify-end items-end">
-      <q-btn-dropdown label="Connection mode" color="primary">
+    <div class="col-12 col-md-6 q-pa-md flex">
+      <q-btn-dropdown class="col" label="Modo de conexión" color="primary">
         <q-list>
-          <q-item clickable v-close-popup @click="current.connectionMode = 'AP'">
+          <q-item clickable v-close-popup @click="current.connectionMode = AP">
             <q-item-section avatar>
-              <q-icon name="check" v-if="current.connectionMode === 'AP'"/>
+              <q-icon name="check" v-if="current.connectionMode === AP"/>
             </q-item-section>
             <q-item-section>AP</q-item-section>
           </q-item>
-          <q-item v-close-popup clickable @click="current.connectionMode = 'STATION'">
+          <q-item v-close-popup clickable @click="current.connectionMode = STATION">
             <q-item-section avatar>
-              <q-icon name="check" v-if="current.connectionMode === 'STATION'"/>
+              <q-icon name="check" v-if="current.connectionMode === STATION"/>
             </q-item-section>
             <q-item-section>Station</q-item-section>
           </q-item>
@@ -39,11 +39,12 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
   import { useCurrentStation } from 'src/utils/storeInterface/use-current-station'
+  import { OperationModeEnum } from 'src/types/station'
 
   export default defineComponent({
-    name: 'network',
+    name: 'red',
     setup() {
-      return { current: useCurrentStation() }
+      return { current: useCurrentStation(), ...OperationModeEnum }
     }
   })
 </script>

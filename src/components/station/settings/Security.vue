@@ -15,7 +15,7 @@
   import { useCurrentStation } from 'src/utils/storeInterface/use-current-station'
 
   export default defineComponent({
-    name: 'security',
+    name: 'seguridad',
     setup() {
       return {
         maxInactiviy: ref(1), minToHumanReadableFormat,

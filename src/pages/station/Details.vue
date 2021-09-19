@@ -57,7 +57,10 @@
 
       const selectVariable = (key: string) => {
         return readings.value.filter(reading => !!(reading[key]))
-          .map(reading => ({ date: reading.date, reading: reading[key] }))
+          .map(reading => ({
+            date: reading.date,
+            reading: reading[key]
+          }))
       }
 
       const loadData = async () => {

@@ -11,7 +11,7 @@
     </section>
     <q-space/>
     <section class="text-right q-gutter-md">
-      <q-btn color="negative" label="Borrar datos" @click="formatData(station)"/>
+      <q-btn color="negative" label="Borrar datos" @click="formatData"/>
       <q-btn :disabled="!enableDownload" color="secondary" label="Descargar datos" @click="downloadData(station)"/>
     </section>
   </q-tab-panel>
@@ -47,8 +47,7 @@
       const storage = ref({})
 
       onBeforeMount(async () => {
-        const { data } = await axios.get(`http://${props.station.currentUrl}/storage`)
-        console.log(data)
+        const { data } = await axios.get(`http://${<string>(props.station.currentUrl)}/storage`)
         storage.value = data
       })
 
@@ -66,21 +65,34 @@
         enableDownload.value = true
         if (!data) return
 
-        const obj = data.split('\r\n').map((rawReading: string) => {
-          const sbj: Record<string, string | number> = {}
-          rawReading.split(';').map((innerRead: string) => {
-            let [key, value]: (string | number)[] = innerRead.split('=')
-            if (key === undefined || value === undefined) return
-            if (!isNaN(parseFloat(value))) {
-              value = parseFloat(value)
-            } else {
-              value = value.replace(/["\\]+/g, '')
-            }
-            sbj[key] = value
+        const obj = data.split('\r\n')
+          .map((rawReading: string) => {
+            const sbj: Record<string, string | number> = {}
+            rawReading.split(';').map((innerRead: string) => {
+              let [key, value]: (string | number)[] = innerRead.split('=')
+              if (key === undefined || value === undefined) return
+              if (!isNaN(parseFloat(value))) {
+                value = parseFloat(value)
+              } else {
+                value = value.replace(/["\\]+/g, '')
+              }
+              sbj[key] = value
+            })
+            sbj.StationId = <number>station.id
+            return sbj
           })
-          sbj.StationId = station.id
-          return sbj
-        }).filter(sbj => Object.keys(sbj).length > 1 && sbj.date)
+          .filter(sbj => Object.keys(sbj).length > 2 && sbj.timestamp)
+          .map((sbj: Record<string, number | string>) => {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { timestamp, date, ...rest } = sbj
+            const d = new Date(<number>timestamp * 1000)
+            console.log(d.toUTCString())
+            return {
+              date: d.toUTCString(),
+              ...rest
+            }
+          })
+        console.log(obj)
         await api.post('/reading', obj)
           .then(() => {
             q.notify({
@@ -97,7 +109,7 @@
           })
       }
 
-      function formatData(station: Station) {
+      function formatData() {
         showFormat.value = true
       }
 

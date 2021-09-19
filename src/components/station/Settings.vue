@@ -3,7 +3,7 @@
     <q-card class="flex" style="width: 80vw; max-width: 1280px; height: 80vh; max-height: 80vh;">
       <q-form @cancel="cancel" @submit="closeDialog" class="col column">
         <q-card-section class="col-auto">
-          <div class="text-h5">Editar parametros de estacion</div>
+          <div class="text-h5">Editar parametros de estación</div>
         </q-card-section>
         <q-card-section class="col column">
           <q-tabs v-model="currentTab">
@@ -30,7 +30,7 @@
   import { defineComponent, ref } from 'vue'
   import { useStore } from 'src/store'
 
-  const tabs = ['network', 'variables', 'security']
+  const tabs = ['red', 'variables', 'seguridad']
 
 
   export default defineComponent({

@@ -2,14 +2,14 @@
   <div class="q-pa-md row">
     <div class="col-12 col-md-6 q-pa-md">
       <div>
-        Sensor Reading Interval
+        Leer sensores cada
         <q-slider :min="15" :step="15" :max="15*4*24" markers v-model="current.Settings.generalReadDelay"/>
         {{minToHumanReadableFormat(current.Settings.generalReadDelay)}}
       </div>
     </div>
     <div class="col-12 col-md-6 q-pa-md">
       <div>
-        Precipitation Reading Interval
+        Leer sensor de precipitación cada
         <q-slider :min="15" :step="15" :max="15*4*24" markers v-model="current.Settings.precipitationReadDelay"/>
         {{minToHumanReadableFormat(current.Settings.precipitationReadDelay)}}
       </div>
