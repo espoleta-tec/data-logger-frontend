@@ -5,10 +5,10 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue'), name: 'dashboard' },
-      { path: 'settings', component: () => import('pages/station/Index.vue'), name: 'settings' },
+      { path: '', component: () => import('pages/Index.vue'), name: 'Tablero' },
+      { path: 'settings', component: () => import('pages/station/Index.vue'), name: 'Ajustes' },
       { path: 'station/:id', component: () => import('pages/station/Details.vue'), props: true },
-      { path: 'download', component: () => import('pages/download/Index.vue'), name: 'download' }
+      { path: 'download', component: () => import('pages/download/Index.vue'), name: 'Descarga' }
     ]
   },
 

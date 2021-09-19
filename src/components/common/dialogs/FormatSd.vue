@@ -16,7 +16,6 @@
   import axios from 'axios'
   import { useQuasar } from 'quasar'
   import { useStore } from 'src/store'
-  import { api } from 'boot/axios'
 
   export default defineComponent({
     // name: 'ComponentName'
@@ -46,13 +45,17 @@
         }
 
         await axios.get(`http://${url}/format`, {
-          headers: {
-            'Authorization': `Bearer ${access_token}`
-          }
-        })
-        q.notify({
-          message: 'exito',
-          color: 'positive'
+          headers: { Authorization: `Bearer ${access_token}` }
+        }).then(() => {
+          q.notify({
+            message: 'exito',
+            color: 'positive'
+          })
+        }).catch(() => {
+          q.notify({
+            message: error,
+            color: 'negative'
+          })
         })
       }
 
