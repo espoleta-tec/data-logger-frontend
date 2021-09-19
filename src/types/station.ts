@@ -31,6 +31,8 @@ export class Station {
 
   ssid = 'station-ap'
 
+  dhcp = true
+
   password = 'ap-password'
 
   hostname = 'station-0'

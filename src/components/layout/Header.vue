@@ -3,7 +3,7 @@
     <q-toolbar class="q-pa-sm">
       <q-btn @click="$store.commit('layout/toggleDrawer')" color="white" flat icon="menu"/>
       <q-btn @click="$router.push('/')" flat icon="home"/>
-      <q-btn @click="$router.go(-1)" flat icon="chevron_left" label="back" v-if="enableBack"/>
+      <q-btn @click="$router.go(-1)" flat icon="chevron_left" label="Atrás" v-if="enableBack"/>
       <q-space/>
       <q-btn-dropdown flat icon="language" v-if="false">
         <q-list>

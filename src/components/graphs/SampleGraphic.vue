@@ -1,6 +1,5 @@
 <template>
   <div class="text-black q-pa-md full-width">
-    {{data}}
     <slot name="title"></slot>
     <apexchart :options="chartOptions" :series="series" height="100%" width="100%"/>
   </div>

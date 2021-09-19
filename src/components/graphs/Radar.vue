@@ -1,7 +1,6 @@
 <template>
     <div class="text-black q-pa-md column">
         <div class="col-1">
-            {{minDate}}{{maxDate}}{{categories}}
         </div>
         <div class="col">
             <apexchart :options="chartOptions" :series="series"

@@ -86,13 +86,11 @@
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { timestamp, date, ...rest } = sbj
             const d = new Date(<number>timestamp * 1000)
-            console.log(d.toUTCString())
             return {
               date: d.toUTCString(),
               ...rest
             }
           })
-        console.log(obj)
         await api.post('/reading', obj)
           .then(() => {
             q.notify({
