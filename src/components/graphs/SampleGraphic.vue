@@ -27,8 +27,12 @@
     setup(props) {
       const chartOptions: ApexOptions = {
         chart: {
-          type: 'area'
-
+          type: 'area',
+          toolbar: {
+            tools: {
+              pan: false
+            }
+          }
         },
         xaxis: {
           type: 'datetime',
@@ -36,7 +40,6 @@
             datetimeUTC: false
           }
         }
-
       }
 
       const series: ApexAxisChartSeries = [

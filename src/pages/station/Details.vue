@@ -32,7 +32,6 @@
   import Radar from 'components/graphs/Radar.vue'
   import { useStore } from 'src/store'
   import { api } from 'boot/axios'
-  import { Station } from 'src/types/station'
 
   const tabs = Object.getOwnPropertyNames(new StationVariableDto())
 
@@ -68,12 +67,10 @@
       const loadData = async () => {
         const { data: variables } = await api.get<StationVariableDto[]>('/reading', {
           params: {
-            'filter[$and][Station]': props.id
+            'filter[$and][Station]': props.id,
+            order: 'date'
           }
         })
-        const { data: stations } = await api.get<Station[]>('/station')
-
-        store.commit('station/loadAvailableStations', stations)
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         readings.value = variables as any
       }
