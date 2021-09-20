@@ -66,7 +66,11 @@
       }
 
       const loadData = async () => {
-        const { data: variables } = await api.get<StationVariableDto[]>('/reading')
+        const { data: variables } = await api.get<StationVariableDto[]>('/reading', {
+          params: {
+            'filter[$and][Station]': props.id
+          }
+        })
         const { data: stations } = await api.get<Station[]>('/station')
 
         store.commit('station/loadAvailableStations', stations)

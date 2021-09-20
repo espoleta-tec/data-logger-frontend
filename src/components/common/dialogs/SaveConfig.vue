@@ -43,7 +43,7 @@
           })
           return
         }
-
+        
         await store.dispatch('station/uploadConfig', { station: sta, token: access_token })
         q.notify({
           message: 'exito',
