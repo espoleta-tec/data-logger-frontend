@@ -16,5 +16,7 @@ export class StationVariableDto {
 
   evapoTranspiration = 0
 
+  precipitation = 0
+
 }
 

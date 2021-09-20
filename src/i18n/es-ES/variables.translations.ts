@@ -9,5 +9,7 @@ export const variables = {
 
   pressure: 'presión',
 
-  evapoTranspiration: 'evapotranspiración'
+  evapoTranspiration: 'evapotranspiración',
+
+  precipitation: 'precipitaciones'
 }

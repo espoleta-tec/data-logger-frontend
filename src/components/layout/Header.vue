@@ -38,8 +38,13 @@
         i18n.locale.value = locale
       }
       const closeApp = async () => {
-        await api.get('shutdown')
+        let shutdownPromise = api.get('shutdown').catch(() => {
+            window.location.reload()
+          }
+        )
+        console.log('closing window')
         window.location.reload()
+        await shutdownPromise
       }
 
       return {
