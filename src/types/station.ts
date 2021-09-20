@@ -12,9 +12,9 @@ export enum ConnectionStatusEnum {
 export class StationSettings {
   id: number | null = null
 
-  generalReadDelay = 1
+  generalReadDelay = 15
 
-  precipitationReadDelay = 1
+  precipitationReadDelay = 15
 
   username = 'admin'
 
