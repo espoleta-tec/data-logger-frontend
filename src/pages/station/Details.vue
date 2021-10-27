@@ -1,8 +1,12 @@
 <template>
   <q-page class="column" padding>
     <template v-if="mounted">
-      <section class="col-auto q-pa-md">
-        Detalles de estación <span class="text-weight-bolder text-h6">{{stationToRead?.hostname}}</span>
+      <section class="col-auto q-pa-md flex justify-between">
+        <div>Detalles de estación <span class="text-weight-bolder text-h6">{{stationToRead?.hostname}}</span></div>
+        <a :href="`${$api.defaults.baseURL}/reading/csv/${stationToRead?.id}`"
+           :download="`lecturas_${stationToRead?.hostname}_${new Date().toISOString()}.csv`" style="text-decoration: none">
+          <q-btn color="primary">Descargar lecturas de estación</q-btn>
+        </a>
       </section>
       <section>
         <q-tabs v-model="currentTab">

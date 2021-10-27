@@ -14,6 +14,12 @@
           </q-item>
         </q-list>
       </q-btn-dropdown>
+      <a :href="`${$api.defaults.baseURL}/reading/csv`"
+         :download="`lecturas_${new Date().toISOString()}.csv`"
+         style="text-decoration: none">
+        <q-btn color="white" text-color="primary">Descargar csv</q-btn>
+      </a>
+      <div class="q-pa-sm"></div>
       <q-btn label="Cerrar" color="pink-7" @click="closeApp"/>
     </q-toolbar>
   </q-header>
