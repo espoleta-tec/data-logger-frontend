@@ -1,8 +1,3 @@
-
-export interface Indexable {
-  [index: string]: string | number | undefined
-}
-
 export class StationVariableDto {
   temperature = 0
 
@@ -16,7 +11,9 @@ export class StationVariableDto {
 
   evapoTranspiration = 0
 
-  precipitation = 0
+  // precipitation = 0
+
+  rain = 0
 
 }
 
