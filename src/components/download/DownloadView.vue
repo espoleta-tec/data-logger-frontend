@@ -66,7 +66,7 @@ export default defineComponent({
         console.log('access not granted')
         return
       }
-      const { data } = await axios.get<string>(`http://${station.currentUrl}/logs`, {
+      const { data } = await axios.get<string>(`http://${station.currentUrl}/logs-global`, {
         headers: {
           'Authorization': `Bearer ${access_token as string}`
         }
