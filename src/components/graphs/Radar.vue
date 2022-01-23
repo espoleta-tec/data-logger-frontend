@@ -1,6 +1,5 @@
 <template>
   <div class="text-black q-pa-md column">
-    {{ data }}
     <div class="col-1">
     </div>
     <div class="col">
@@ -47,19 +46,19 @@ export default defineComponent({
     const categories = computed(() => {
       const categories: { [index: string]: number } = {}
       props.data
-          .filter((r: { date: string, reading: string }) => {
-            return new Date(r.date).getTime() > new Date(minDate.value).getTime()
-          })
-          .filter((r: { date: string, reading: string }) => {
-            return new Date(r.date).getTime() < new Date().setDate(new Date(maxDate.value).getDate() + 1)
-          })
-          .map((r: { date: string, reading: string }) => {
-            if (!categories[r.reading]) {
-              categories[r.reading] = 1
-            } else {
-              categories[r.reading]++
-            }
-          })
+        .filter((r: { date: string, reading: string }) => {
+          return new Date(r.date).getTime() > new Date(minDate.value).getTime()
+        })
+        .filter((r: { date: string, reading: string }) => {
+          return new Date(r.date).getTime() < new Date().setDate(new Date(maxDate.value).getDate() + 1)
+        })
+        .map((r: { date: string, reading: string }) => {
+          if (!categories[r.reading]) {
+            categories[r.reading] = 1
+          } else {
+            categories[r.reading]++
+          }
+        })
 
       return categoriesHeaders.map(h => {
         return categories[h] || 0
