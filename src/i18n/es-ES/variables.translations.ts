@@ -11,5 +11,7 @@ export const variables = {
 
   evapoTranspiration: 'evapotranspiración',
 
-  rain: 'precipitaciones'
+  rain: 'precipitaciones',
+
+  radiation: 'radiación'
 }

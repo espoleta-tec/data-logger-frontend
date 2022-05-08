@@ -3,23 +3,23 @@
     <template v-if="mounted">
       <section class="col-auto q-pa-md flex justify-between">
         <div>Detalles de estación <span class="text-weight-bolder text-h6">{{ stationToRead?.hostname }}</span></div>
-        <a :href="`${$api.defaults.baseURL}/reading/csv/${stationToRead?.id}`"
-           :download="`lecturas_${stationToRead?.hostname}_${new Date().toISOString()}.csv`"
+        <a :download="`lecturas_${stationToRead?.hostname}_${new Date().toISOString()}.csv`"
+           :href="`${$api.defaults.baseURL}/reading/csv/${stationToRead?.id}`"
            style="text-decoration: none">
           <q-btn color="primary">Descargar lecturas de estación</q-btn>
         </a>
       </section>
       <section>
         <q-tabs v-model="currentTab">
-          <q-tab :key="t" :label="$t(`variables.${t}`)" :name="t" v-for="t in tabs"></q-tab>
+          <q-tab v-for="t in tabs" :key="t" :label="$t(`variables.${t}`)" :name="t"></q-tab>
         </q-tabs>
       </section>
       <section class="q-pa-lg col flex">
-        <q-tab-panels class="col" v-model="currentTab" :key="readings.length">
-          <q-tab-panel :key="p" :name="p" class="flex" v-for="p in tabs">
+        <q-tab-panels :key="readings.length" v-model="currentTab" class="col">
+          <q-tab-panel v-for="p in tabs" :key="p" :name="p" class="flex">
             <q-card class="col row">
-              <Radar :data="selectVariable(p)" class="col-12 col-md" v-if="p === 'windDirection'"/>
-              <SampleGraphic :data="selectVariable(p)" class="col-12 col-md" v-else>
+              <Radar v-if="p === 'windDirection'" :data="selectVariable(p)" class="col-12 col-md"/>
+              <SampleGraphic v-else :data="selectVariable(p)" class="col-12 col-md">
                 <template v-slot:title></template>
               </SampleGraphic>
             </q-card>
@@ -64,10 +64,15 @@ export default defineComponent({
 
     const selectVariable = (key: string) => {
       return readings.value
-        // .filter(reading => !!(reading[key]))
-        .map(reading => ({
-          date: reading.date, reading: reading[key]
-        }))
+        .map((reading, idx, parentReadings) => {
+          let readValue = reading[key]
+          if (key === 'rain' && idx > 0) {
+            readValue = reading[key] - parentReadings[idx - 1][key]
+          }
+          return {
+            date: reading.date, reading: readValue
+          }
+        })
     }
 
     const loadData = async () => {

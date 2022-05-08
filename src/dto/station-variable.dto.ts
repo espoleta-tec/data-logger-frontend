@@ -15,5 +15,7 @@ export class StationVariableDto {
 
   rain = 0
 
+  radiation = 0
+
 }
 
